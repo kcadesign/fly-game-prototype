@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float verticalSpeed = 5f;
     [SerializeField] private float mouseLookSpeed = 1f;
 
+    [SerializeField] private float gravityMultiplier = 1f;
+
 
     void Start()
     {
@@ -41,13 +43,6 @@ public class PlayerMovement : MonoBehaviour
         // Strafe left and right
         transform.position += horizontalInput * speed * Time.deltaTime * transform.right;
         */
-
-        // Move forward or backward with physics force
-
-        // Strafe left and right with physics force
-
-        // Move vertically with physics force
-
     }
 
     private void HandleForwardMovement()
@@ -55,14 +50,14 @@ public class PlayerMovement : MonoBehaviour
         float forwardInput = Input.GetAxisRaw("Vertical");
         Vector3 forwardForce = lateralSpeed * forwardInput * transform.forward;
 
-        if (forwardInput != 0)
-        {
-            rigidBody.AddForce(forwardForce, ForceMode.Impulse);
-        }
-        else
+        if (forwardInput == 0)
         {
             forwardForce = Vector3.zero;
-            rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
+            //rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
+        }
+        else if(forwardInput != 0)
+        {
+            rigidBody.AddForce(forwardForce, ForceMode.Impulse);
         }
     }
 
@@ -71,14 +66,14 @@ public class PlayerMovement : MonoBehaviour
         float lateralInput = Input.GetAxisRaw("Horizontal");
         Vector3 lateralForce = lateralSpeed * lateralInput * transform.right;
 
-        if (lateralInput != 0)
-        {
-            rigidBody.AddForce(lateralForce, ForceMode.Impulse);
-        }
-        else
+        if (lateralInput == 0)
         {
             lateralForce = Vector3.zero;
-            rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
+            //rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
+        }
+        else if(lateralInput != 0)
+        {
+            rigidBody.AddForce(lateralForce, ForceMode.Impulse);
         }
     }
 
@@ -87,14 +82,15 @@ public class PlayerMovement : MonoBehaviour
         float verticalInput = Input.GetAxisRaw("Jump");
         Vector3 verticalForce = verticalSpeed * verticalInput * transform.up;
 
-        if (verticalInput != 0)
-        {
-            rigidBody.AddForce(verticalForce, ForceMode.Impulse);
-        }
-        else
+        if (verticalInput == 0)
         {
             verticalForce = Vector3.zero;
-            rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
+            //rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
+            rigidBody.AddForce(Vector3.down * Physics.gravity.magnitude * gravityMultiplier, ForceMode.Acceleration);
+        }
+        else if (verticalInput != 0)
+        {
+            rigidBody.AddForce(verticalForce, ForceMode.Impulse);
         }
     }
 
@@ -111,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 currentRotation = transform.rotation.eulerAngles;
         float newRotationX = currentRotation.x - mouseY;
         transform.rotation = Quaternion.Euler(newRotationX, currentRotation.y, 0);
+
     }
 
 }
