@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerFly : MonoBehaviour
 {
     [Header("References")]
     private Rigidbody rigidBody;
 
     [Header("Speed Values")]
-    [SerializeField] private float lateralSpeed = 5f;
+    [SerializeField] private float lateralFlySpeed = 5f;
     [SerializeField] private float verticalSpeed = 5f;
+
     [SerializeField] private float mouseLookSpeed = 1f;
 
     [Header("Physical Values")]
     [SerializeField] private float gravityMultiplier = 1f;
     [SerializeField] private float verticalLiftValue = 0.5f;
+
+
+
 
     void Start()
     {
@@ -24,20 +28,26 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
     }
 
+   
+
     void FixedUpdate()
     {
-        HandleMovement();
+
+
+        HandleFlying();
 
         HandleMouseLook();
     }
 
-    private void HandleMovement()
+    
+
+    private void HandleFlying()
     {
         float forwardInput = Input.GetAxisRaw("Vertical");
         float lateralInput = Input.GetAxisRaw("Horizontal");
 
         Vector3 movementDirection = (forwardInput * transform.forward + lateralInput * transform.right).normalized;
-        Vector3 movementForce = lateralSpeed * movementDirection + VerticalLift();
+        Vector3 movementForce = lateralFlySpeed * movementDirection + VerticalLift();
 
         if (movementDirection.magnitude == 0)
         {
@@ -51,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         float verticalInput = Input.GetAxisRaw("Jump");
         Vector3 verticalForce = verticalSpeed * verticalInput * Vector3.up;
 
-        if (verticalInput == 0)
+        if (verticalForce.magnitude == 0)
         {
             verticalForce = Vector3.zero;
             
@@ -65,6 +75,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidBody.AddForce(Vector3.down * Physics.gravity.magnitude * gravityMultiplier, ForceMode.Acceleration);
         }
+
+        //print(rigidBody.velocity.y);
     }
 
     private Vector3 VerticalLift()
