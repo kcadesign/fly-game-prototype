@@ -8,7 +8,7 @@ public class PlayerWalk : MonoBehaviour
     private Rigidbody rigidBody;
 
 
-    [SerializeField] private float lateralWalkSpeed = 1f;
+    [SerializeField] private float WalkSpeed = 1f;
 
 
     // Start is called before the first frame update
@@ -29,7 +29,7 @@ public class PlayerWalk : MonoBehaviour
         float forwardInput = Input.GetAxisRaw("Vertical");
         float turnInput = Input.GetAxisRaw("Horizontal");
 
-        Vector3 forwardForce = lateralWalkSpeed * forwardInput * transform.forward;
+        Vector3 forwardForce = WalkSpeed * forwardInput * transform.forward;
 
         transform.Rotate(0f, turnInput, 0f);
 
@@ -42,6 +42,7 @@ public class PlayerWalk : MonoBehaviour
             rigidBody.AddForce(forwardForce, ForceMode.Impulse);
         }
     }
+
 }
 
 

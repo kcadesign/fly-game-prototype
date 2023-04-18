@@ -7,15 +7,15 @@ public class PlayerFly : MonoBehaviour
     [Header("References")]
     private Rigidbody rigidBody;
 
-    [Header("Speed Values")]
+    [Header("Flying Values")]
     [SerializeField] private float lateralFlySpeed = 5f;
-    [SerializeField] private float verticalSpeed = 5f;
+    [SerializeField] private float verticalFlySpeed = 5f;
+    [SerializeField] private float verticalLiftValue = 0.5f;
 
-    [SerializeField] private float mouseLookSpeed = 1f;
+    //[SerializeField] private float mouseLookSpeed = 1f;
 
     [Header("Physical Values")]
     [SerializeField] private float gravityMultiplier = 1f;
-    [SerializeField] private float verticalLiftValue = 0.5f;
 
 
 
@@ -24,8 +24,6 @@ public class PlayerFly : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
    
@@ -36,7 +34,7 @@ public class PlayerFly : MonoBehaviour
 
         HandleFlying();
 
-        HandleMouseLook();
+        //HandleMouseLookMove();
     }
 
     
@@ -59,7 +57,7 @@ public class PlayerFly : MonoBehaviour
         }
 
         float verticalInput = Input.GetAxisRaw("Jump");
-        Vector3 verticalForce = verticalSpeed * verticalInput * Vector3.up;
+        Vector3 verticalForce = verticalFlySpeed * verticalInput * Vector3.up;
 
         if (verticalForce.magnitude == 0)
         {
@@ -83,8 +81,8 @@ public class PlayerFly : MonoBehaviour
     {
         return new Vector3(0, verticalLiftValue, 0);
     }
-
-    private void HandleMouseLook()
+    /*
+    private void HandleMouseLookMove()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseLookSpeed;
         float mouseY = Input.GetAxis("Mouse Y") * mouseLookSpeed;
@@ -97,5 +95,5 @@ public class PlayerFly : MonoBehaviour
         float newRotationX = currentRotation.x - mouseY;
         transform.rotation = Quaternion.Euler(newRotationX, currentRotation.y, 0);
     }
-
+    */
 }
