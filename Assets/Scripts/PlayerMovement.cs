@@ -12,8 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float verticalSpeed = 5f;
     [SerializeField] private float mouseLookSpeed = 1f;
 
+    [Header("Physical Values")]
     [SerializeField] private float gravityMultiplier = 1f;
-
+    [SerializeField] private float verticalLiftValue = 0.5f;
 
     void Start()
     {
@@ -32,68 +33,44 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        HandleForwardMovement();
-        HandleLateralMovement();
-        HandleVerticalMovement();
-
-        /*
-        // Move forward or backward
-        transform.position += speed * Time.deltaTime * verticalInput * transform.forward;
-
-        // Strafe left and right
-        transform.position += horizontalInput * speed * Time.deltaTime * transform.right;
-        */
-    }
-
-    private void HandleForwardMovement()
-    {
         float forwardInput = Input.GetAxisRaw("Vertical");
-        Vector3 forwardForce = lateralSpeed * forwardInput * transform.forward;
-
-        if (forwardInput == 0)
-        {
-            forwardForce = Vector3.zero;
-            //rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
-        }
-        else if(forwardInput != 0)
-        {
-            rigidBody.AddForce(forwardForce, ForceMode.Impulse);
-        }
-    }
-
-    private void HandleLateralMovement()
-    {
         float lateralInput = Input.GetAxisRaw("Horizontal");
-        Vector3 lateralForce = lateralSpeed * lateralInput * transform.right;
 
-        if (lateralInput == 0)
-        {
-            lateralForce = Vector3.zero;
-            //rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
-        }
-        else if(lateralInput != 0)
-        {
-            rigidBody.AddForce(lateralForce, ForceMode.Impulse);
-        }
-    }
+        Vector3 movementDirection = (forwardInput * transform.forward + lateralInput * transform.right).normalized;
+        Vector3 movementForce = lateralSpeed * movementDirection + VerticalLift();
 
-    private void HandleVerticalMovement()
-    {
+        if (movementDirection.magnitude == 0)
+        {
+            movementForce = Vector3.zero;
+        }
+        else
+        {
+            rigidBody.AddForce(movementForce, ForceMode.Impulse);
+        }
+
         float verticalInput = Input.GetAxisRaw("Jump");
-        Vector3 verticalForce = verticalSpeed * verticalInput * transform.up;
+        Vector3 verticalForce = verticalSpeed * verticalInput * Vector3.up;
 
         if (verticalInput == 0)
         {
             verticalForce = Vector3.zero;
-            //rigidBody.AddForce(-rigidBody.velocity, ForceMode.Impulse);
-            rigidBody.AddForce(Vector3.down * Physics.gravity.magnitude * gravityMultiplier, ForceMode.Acceleration);
+            
         }
         else if (verticalInput != 0)
         {
             rigidBody.AddForce(verticalForce, ForceMode.Impulse);
         }
+
+        if(forwardInput == 0 && lateralInput == 0 && verticalInput == 0)
+        {
+            rigidBody.AddForce(Vector3.down * Physics.gravity.magnitude * gravityMultiplier, ForceMode.Acceleration);
+        }
     }
 
+    private Vector3 VerticalLift()
+    {
+        return new Vector3(0, verticalLiftValue, 0);
+    }
 
     private void HandleMouseLook()
     {
@@ -107,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 currentRotation = transform.rotation.eulerAngles;
         float newRotationX = currentRotation.x - mouseY;
         transform.rotation = Quaternion.Euler(newRotationX, currentRotation.y, 0);
-
     }
 
 }
