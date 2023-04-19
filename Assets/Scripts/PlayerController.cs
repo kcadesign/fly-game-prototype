@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
         playerFly = GetComponent<PlayerFly>();
 
     }
-
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         playerWalk.enabled = true;
@@ -39,6 +39,6 @@ public class PlayerController : MonoBehaviour
         playerFly.enabled = true;
 
     }
-
+    */
 
 }
