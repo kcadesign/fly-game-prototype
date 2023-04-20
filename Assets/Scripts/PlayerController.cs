@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public delegate void PlayerWalking(bool isWalking);
     public static event PlayerWalking playerWalking;
 
+    [Header("References")]
     private PlayerWalk playerWalk;
     private PlayerFly playerFly;
     
