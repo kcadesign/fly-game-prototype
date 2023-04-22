@@ -12,88 +12,68 @@ public class PlayerFly : MonoBehaviour
     [SerializeField] private float verticalFlySpeed = 5f;
     [SerializeField] private float verticalLiftValue = 0.5f;
 
-    //[SerializeField] private float mouseLookSpeed = 1f;
-
     [Header("Physical Values")]
     [SerializeField] private float gravityMultiplier = 1f;
 
-
-
+    [Header("Input")]
+    private float forwardInput;
+    private float lateralInput;
+    private float verticalInput;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-
     }
 
-   
+    void Update()
+    {
+        
+        forwardInput = Input.GetAxisRaw("Vertical");
+        lateralInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Jump");
+        
+    }
 
     void FixedUpdate()
     {
-
-
-        HandleFlying();
-
-        //HandleMouseLookMove();
+        HandleLateralMovement(forwardInput, lateralInput);
+        HandleVerticalMovement(verticalInput);
+        HandleGravity(forwardInput, lateralInput, verticalInput);
     }
 
-    
-
-    private void HandleFlying()
+    private void HandleLateralMovement(float forwardInput, float lateralInput)
     {
-        float forwardInput = Input.GetAxisRaw("Vertical");
-        float lateralInput = Input.GetAxisRaw("Horizontal");
-
         Vector3 movementDirection = (forwardInput * transform.forward + lateralInput * transform.right).normalized;
-        Vector3 movementForce = lateralFlySpeed * movementDirection + VerticalLift();
+        Vector3 movementForce = lateralFlySpeed * Time.deltaTime * movementDirection + VerticalLift();
 
-        if (movementDirection.magnitude == 0)
-        {
-            movementForce = Vector3.zero;
-        }
-        else
+        if (forwardInput != 0 || lateralInput != 0)
         {
             rigidBody.AddForce(movementForce, ForceMode.Impulse);
         }
+    }
 
-        float verticalInput = Input.GetAxisRaw("Jump");
-        Vector3 verticalForce = verticalFlySpeed * verticalInput * Vector3.up;
+    public void HandleVerticalMovement(float verticalInput)
+    {
+        Vector3 verticalForce = verticalFlySpeed * Time.deltaTime * verticalInput * Vector3.up;
 
-        if (verticalForce.magnitude == 0)
-        {
-            verticalForce = Vector3.zero;
-            
-        }
-        else if (verticalInput != 0)
+        
+        if (verticalInput != 0)
         {
             rigidBody.AddForce(verticalForce, ForceMode.Impulse);
         }
+        
+    }
 
-        if(forwardInput == 0 && lateralInput == 0 && verticalInput == 0)
+    private void HandleGravity(float forwardInput, float lateralInput, float verticalInput)
+    {
+        if (forwardInput == 0 && lateralInput == 0 && verticalInput == 0)
         {
             rigidBody.AddForce(Vector3.down * Physics.gravity.magnitude * gravityMultiplier, ForceMode.Acceleration);
         }
-
-        //print(rigidBody.velocity.y);
     }
-
+    
     private Vector3 VerticalLift()
     {
         return new Vector3(0, verticalLiftValue, 0);
     }
-    /*
-    private void HandleMouseLookMove()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * mouseLookSpeed;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseLookSpeed;
-
-        // Rotate the player object around its y-axis (left and right)
-        transform.Rotate(0f, mouseX, 0f);
-
-        // Rotate the player object around its x-axis (up and down)
-        Vector3 currentRotation = transform.rotation.eulerAngles;
-        float newRotationX = currentRotation.x - mouseY;
-        transform.rotation = Quaternion.Euler(newRotationX, currentRotation.y, 0);
-    }
-    */
 }

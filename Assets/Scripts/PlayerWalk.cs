@@ -7,18 +7,15 @@ public class PlayerWalk : MonoBehaviour
     [Header("References")]
     private Rigidbody rigidBody;
 
-
     [SerializeField] private float WalkSpeed = 1f;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
 
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         HandleWalking();

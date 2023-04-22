@@ -4,35 +4,39 @@ using UnityEngine;
 
 public class TakeOffLanding : MonoBehaviour
 {
+    [Header("References")]
+    //private Rigidbody rigidBody;
     private CapsuleCollider capsuleCollider;
 
     private float colliderOriginalSize;
-    [SerializeField] private float colliderHoverSize;
-    [SerializeField] private bool isHoverToggled;
+    [SerializeField] private float colliderHoverDistance;
+    public bool isTakingOff = false;
 
 
-    // Start is called before the first frame update
     void Start()
     {
+        //rigidBody = GetComponent<Rigidbody>();
+
         capsuleCollider = GetComponent<CapsuleCollider>();
         colliderOriginalSize = capsuleCollider.radius;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            isHoverToggled = !isHoverToggled;
+            isTakingOff = !isTakingOff;
         }
 
-        if (!isHoverToggled)
+        if (isTakingOff)
         {
-            capsuleCollider.radius = colliderHoverSize;
+            capsuleCollider.radius = colliderHoverDistance;
         }
         else
         {
             capsuleCollider.radius = colliderOriginalSize;
         }
+        
     }
+
 }
