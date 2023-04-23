@@ -1186,8 +1186,6 @@ GameObject:
   - component: {fileID: 681436484}
   - component: {fileID: 681436495}
   - component: {fileID: 681436486}
-  - component: {fileID: 681436501}
-  - component: {fileID: 681436500}
   - component: {fileID: 681436492}
   - component: {fileID: 681436493}
   - component: {fileID: 681436491}
@@ -1227,15 +1225,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681436483}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb9599652602eac43991c74121712ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lateralFlySpeed: 125
-  verticalFlySpeed: 125
-  verticalLiftValue: 0.3
-  gravityMultiplier: 20
 --- !u!54 &681436486
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1338,94 +1332,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681436483}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c77c4f8a02921f458d60bc1d3fbd0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &681436500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681436483}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084b9c936f03213458eec81ea166890b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &681436501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681436483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: b49909b07cbc0e84593c14a879cc3400,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1b9d1e41-4896-4e1a-9389-2e7cbb48581e
-    m_ActionName: Gameplay/Look[/DualSenseGamepadHID1/rightStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 658886d0-e25e-41a0-94ae-19da28d87ad3
-    m_ActionName: Gameplay/Move[/DualSenseGamepadHID1/leftStick]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 681436500}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: FlyUp_started
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 681436500}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: FlyUp_canceled
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 899ba018-76cf-4c00-aa22-d600bc14c16a
-    m_ActionName: Gameplay/FlyUp[/DualSenseGamepadHID1/rightShoulder]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c6c7d592-26ff-4055-bfa5-a74a218252f4
-    m_ActionName: Gameplay/Hover[/DualSenseGamepadHID1/leftShoulder]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  verticalSpeed: 125
 --- !u!4 &715151378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6cd8acc9485cb3946ad0dc39c19f5335,

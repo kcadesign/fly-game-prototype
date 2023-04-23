@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 
 public class FlyUp : MonoBehaviour
 {
-    [SerializeField] private float inputValue = 0;
     [SerializeField] private float verticalSpeed = 0;
+    private float inputValue = 0;
+
     private Rigidbody rigidBody;
     private PlayerControls playerControls;
 
@@ -32,7 +33,7 @@ public class FlyUp : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(inputValue);
+        //Debug.Log(inputValue);
         HandleFlyUp();
     }
 
