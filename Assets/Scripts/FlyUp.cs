@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class FlyUp : MonoBehaviour
 {
     [SerializeField] private float verticalSpeed = 0;
-    private float inputValue = 0;
+    [HideInInspector] public float inputValue = 0;
 
     private Rigidbody rigidBody;
     private PlayerControls playerControls;

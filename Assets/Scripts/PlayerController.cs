@@ -12,14 +12,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("References")]
     private PlayerWalk playerWalk;
-    private PlayerFly playerFly;
+    private FlyLateral playerFly;
     private TakeOffLanding takeOffLanding;
     private FlyUp flyUp;
     
     void Start()
     {
         playerWalk = GetComponent<PlayerWalk>();
-        playerFly = GetComponent<PlayerFly>();
+        playerFly = GetComponent<FlyLateral>();
         takeOffLanding = GetComponent<TakeOffLanding>();
         flyUp = GetComponent<FlyUp>();
     }

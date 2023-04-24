@@ -7,26 +7,50 @@ public class Hover : MonoBehaviour
     [Header("References")]
     private Rigidbody rigidBody;
 
+    private PlayerControls playerControls;
+
+
     public bool isHoverToggled;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
+        playerControls = new PlayerControls();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
+        playerControls.Gameplay.Enable();
+        playerControls.Gameplay.Hover.started += Hover_performed;
+        playerControls.Gameplay.Hover.canceled += Hover_canceled;
+    }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            isHoverToggled = !isHoverToggled;
-        }
+    private void OnDisable()
+    {
+        playerControls.Gameplay.Disable();
+        playerControls.Gameplay.Hover.started -= Hover_performed;
+        playerControls.Gameplay.Hover.canceled -= Hover_canceled;
+    }
 
-        
+    private void Hover_performed(UnityEngine.InputSystem.InputAction.CallbackContext value)
+    {
+        isHoverToggled = true;
+    }
 
+    private void Hover_canceled(UnityEngine.InputSystem.InputAction.CallbackContext value)
+    {
+        isHoverToggled = false;
+    }
 
+    private void FixedUpdate()
+    {
+        print(isHoverToggled);
+        HandleHover();
+    }
+
+    private void HandleHover()
+    {
         if (isHoverToggled)
         {
             rigidBody.isKinematic = true;
@@ -35,8 +59,7 @@ public class Hover : MonoBehaviour
         {
             rigidBody.isKinematic = false;
         }
-
-        
-
     }
+
+
 }
