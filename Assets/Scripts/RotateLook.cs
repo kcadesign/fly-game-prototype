@@ -57,7 +57,7 @@ public class RotateLook : MonoBehaviour
         rotationY += lookX;
         rotationX -= lookY;
 
-        rotationX = Mathf.Clamp(rotationX, -80f, 80f);
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
     }

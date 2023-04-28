@@ -45,7 +45,7 @@ public class Hover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        print(isHoverToggled);
+        //print(isHoverToggled);
         HandleHover();
     }
 

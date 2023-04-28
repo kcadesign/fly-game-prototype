@@ -11,7 +11,7 @@ public class FlyLateral : MonoBehaviour
     private PlayerControls playerControls;
 
     
-    [Header("Flying Values")]
+    //[Header("Flying Values")]
     [SerializeField] private float lateralFlySpeed = 5f;
     [SerializeField] private float verticalLiftValue = 0.5f;
 
