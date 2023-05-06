@@ -6,21 +6,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerWalk : PlayerMovementInitialise
 {
-
-
     [Header("References")]
-    //private Rigidbody rigidBody;
-    //private PlayerControls playerControls;
 
     [SerializeField] private float walkSpeed = 1f;
 
     [HideInInspector] public Vector2 leftStickAxis;
-    /*
-    void Awake()
-    {
-        rigidBody = GetComponent<Rigidbody>();
-        playerControls = new PlayerControls();
-    }*/
 
     private void OnEnable()
     {
@@ -38,8 +28,6 @@ public class PlayerWalk : PlayerMovementInitialise
 
     void FixedUpdate()
     {
-        //Debug.Log(leftStickAxis);
-
         HandleWalking();
     }
 

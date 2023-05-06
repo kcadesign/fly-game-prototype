@@ -7,17 +7,8 @@ public class RotateLook : PlayerMovementInitialise
     [SerializeField] private float lookSensitivity = 0;
     private Vector2 rightStickAxis;
 
-    //private PlayerControls playerControls;
-
     private float rotationX = 0f;
     private float rotationY = 0f;
-
-    /*
-    void Awake()
-    {
-        playerControls = new PlayerControls();
-    }
-    */
 
     private void OnEnable()
     {
@@ -39,7 +30,6 @@ public class RotateLook : PlayerMovementInitialise
         HandleRotation();
     }
 
-
     private void Look_performed(UnityEngine.InputSystem.InputAction.CallbackContext value)
     {
         rightStickAxis = value.ReadValue<Vector2>();
@@ -58,10 +48,9 @@ public class RotateLook : PlayerMovementInitialise
         rotationY += lookX;
         rotationX -= lookY;
 
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        //rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+        transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
+
     }
-
-
 }
