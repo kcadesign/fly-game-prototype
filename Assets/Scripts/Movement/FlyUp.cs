@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FlyUp : MonoBehaviour
+public class FlyUp : PlayerMovementInitialise
 {
     [SerializeField] private float verticalSpeed = 0;
     [HideInInspector] public float inputValue = 0;
 
-    private Rigidbody rigidBody;
-    private PlayerControls playerControls;
-
+    //private Rigidbody rigidBody;
+    //private PlayerControls playerControls;
+    /*
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
         playerControls = new PlayerControls();
     }
-
+    */
     private void OnEnable()
     {
         playerControls.Gameplay.Enable();

@@ -13,17 +13,15 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     private PlayerWalk playerWalk;
     private FlyLateral playerFly;
-    private TakeOffLanding takeOffLanding;
     private FlyUp flyUp;
     
     void Start()
     {
         playerWalk = GetComponent<PlayerWalk>();
         playerFly = GetComponent<FlyLateral>();
-        takeOffLanding = GetComponent<TakeOffLanding>();
         flyUp = GetComponent<FlyUp>();
     }
-
+    /*
     private void Update()
     {
         if (takeOffLanding.isTakingOff)
@@ -38,7 +36,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*
+    
     private void OnCollisionEnter(Collision collision)
     {
         playerWalk.enabled = true;

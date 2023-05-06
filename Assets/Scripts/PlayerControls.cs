@@ -71,6 +71,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LandTakeOff"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2a5375f-612c-448e-bade-5a729a659741"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -186,12 +195,45 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""788c64af-27e4-4dae-904d-4c2ccc86a727"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hover"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""4876f1fb-946f-4f14-9d4a-6f1c76b9fe1a"",
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""662c45b3-7dcf-4b62-b03f-7a3535bd0780"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e410af78-6a9e-4571-98dd-644ed6ff0132"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LandTakeOff"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -207,6 +249,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_FlyUp = m_Gameplay.FindAction("FlyUp", throwIfNotFound: true);
         m_Gameplay_Hover = m_Gameplay.FindAction("Hover", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_LandTakeOff = m_Gameplay.FindAction("LandTakeOff", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +316,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_FlyUp;
     private readonly InputAction m_Gameplay_Hover;
     private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_LandTakeOff;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -282,6 +326,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @FlyUp => m_Wrapper.m_Gameplay_FlyUp;
         public InputAction @Hover => m_Wrapper.m_Gameplay_Hover;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @LandTakeOff => m_Wrapper.m_Gameplay_LandTakeOff;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +351,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @LandTakeOff.started += instance.OnLandTakeOff;
+            @LandTakeOff.performed += instance.OnLandTakeOff;
+            @LandTakeOff.canceled += instance.OnLandTakeOff;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -325,6 +373,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @LandTakeOff.started -= instance.OnLandTakeOff;
+            @LandTakeOff.performed -= instance.OnLandTakeOff;
+            @LandTakeOff.canceled -= instance.OnLandTakeOff;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -349,5 +400,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnFlyUp(InputAction.CallbackContext context);
         void OnHover(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnLandTakeOff(InputAction.CallbackContext context);
     }
 }

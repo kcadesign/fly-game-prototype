@@ -2,24 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dash : MonoBehaviour
+public class Dash : PlayerMovementInitialise
 {
     [Header("References")]
-    private Rigidbody rigidBody;
+    //private Rigidbody rigidBody;
 
-    private PlayerControls playerControls;
+    //private PlayerControls playerControls;
 
     private FlyLateral flyLateral;
 
 
     [SerializeField] private float dashSpeed = 0f;
     private Vector3 dashDirection;
-
+    /*
     // Start is called before the first frame update
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
         playerControls = new PlayerControls();
+    }
+    */
+
+    private void Start()
+    {
         flyLateral = GetComponent<FlyLateral>();
     }
 

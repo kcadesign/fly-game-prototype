@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class FlyLateral : MonoBehaviour
+public class FlyLateral : PlayerMovementInitialise
 {
-    [Header("References")]
-    private Rigidbody rigidBody;
-    private PlayerControls playerControls;
+    // Rigidbody and PlayerControls references set in parent script
+
+    //[Header("References")]
+    //private Rigidbody rigidBody;
+    //private PlayerControls playerControls;
 
     
     //[Header("Flying Values")]
@@ -17,11 +19,13 @@ public class FlyLateral : MonoBehaviour
 
     [HideInInspector] public Vector2 leftStickAxis;
 
+    /*
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
         playerControls = new PlayerControls();
     }
+    */
 
     private void OnEnable()
     {

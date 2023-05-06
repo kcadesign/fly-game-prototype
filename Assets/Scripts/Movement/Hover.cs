@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hover : MonoBehaviour
+public class Hover : PlayerMovementInitialise
 {
-    [Header("References")]
-    private Rigidbody rigidBody;
+    //[Header("References")]
+    //private Rigidbody rigidBody;
 
-    private PlayerControls playerControls;
+    //private PlayerControls playerControls;
 
 
     public bool isHoverToggled;
-
+    /*
     // Start is called before the first frame update
     void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
         playerControls = new PlayerControls();
     }
+    */
 
     private void OnEnable()
     {

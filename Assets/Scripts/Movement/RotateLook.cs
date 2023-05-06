@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateLook : MonoBehaviour
+public class RotateLook : PlayerMovementInitialise
 {
     [SerializeField] private float lookSensitivity = 0;
     private Vector2 rightStickAxis;
 
-    private PlayerControls playerControls;
+    //private PlayerControls playerControls;
 
     private float rotationX = 0f;
     private float rotationY = 0f;
 
-
+    /*
     void Awake()
     {
         playerControls = new PlayerControls();
     }
+    */
 
     private void OnEnable()
     {
