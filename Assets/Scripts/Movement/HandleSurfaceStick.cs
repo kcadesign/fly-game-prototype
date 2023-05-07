@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class HandleSurfaceStick : PlayerMovementInitialise
 {
-    public float stickForce = 5;
+    public GameObject render;
+
+    public Transform cameraRotation;
+
+    Vector3 averageNormal = Vector3.zero;
+
+
+    public float stickingForce = 5;
     public int numRays = 5;
     public float maxRayDistance = 1f;
     public float raycastAngle = 360f;
 
+    private void Start()
+    {
+
+    }
+
     private void FixedUpdate()
     {
-        Vector3 averageNormal = Vector3.zero;
         int numHits = 0;
 
         for (int i = 0; i < numRays; i++)
@@ -41,8 +52,26 @@ public class HandleSurfaceStick : PlayerMovementInitialise
         if (numHits > 0)
         {
             averageNormal /= numHits;
-            rigidBody.AddForce(averageNormal * -stickForce);
+            rigidBody.AddForce(averageNormal * -stickingForce);
+            //Debug.Log(averageNormal);
+
         }
+        
+
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Vector3 normal = collision.contacts[0].normal;
+        render.transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, normal), normal);
+
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        render.transform.rotation = cameraRotation.rotation;
+    }
+
 }
+
+
 

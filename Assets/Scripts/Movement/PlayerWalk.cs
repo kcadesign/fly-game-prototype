@@ -9,8 +9,12 @@ public class PlayerWalk : PlayerMovementInitialise
     [Header("References")]
 
     [SerializeField] private float walkSpeed = 1f;
+    [SerializeField] private float turnSpeed = 1f;
+
 
     [HideInInspector] public Vector2 leftStickAxis;
+
+    private float rotationY;
 
     private void OnEnable()
     {
@@ -43,12 +47,20 @@ public class PlayerWalk : PlayerMovementInitialise
 
     private void HandleWalking()
     {
-        Vector3 movementDirection = leftStickAxis.y * transform.forward + leftStickAxis.x * transform.right;
-        Vector3 movementForce = walkSpeed * Time.deltaTime * movementDirection;
+        float rotateX = leftStickAxis.x * Time.deltaTime * turnSpeed;
+        float movementY = leftStickAxis.y * Time.deltaTime;
+
+        rotationY += rotateX;
+        
+
+
+        Vector3 movementForce = movementY * walkSpeed * transform.forward;
 
         if (leftStickAxis.y != 0 || leftStickAxis.x != 0)
         {
             rigidBody.AddForce(movementForce, ForceMode.Impulse);
+            transform.rotation = Quaternion.Euler(0, rotationY, 0);
+
         }
     }
 

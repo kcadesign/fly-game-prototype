@@ -48,9 +48,9 @@ public class RotateLook : PlayerMovementInitialise
         rotationY += lookX;
         rotationX -= lookY;
 
-        //rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
-        transform.localRotation = Quaternion.Euler(rotationX, rotationY, 0);
+        transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
 
     }
 }
