@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
-{
+{/*
     public delegate void PlayerFlying(bool isFlying);
     public static event PlayerFlying playerFlying;
 
