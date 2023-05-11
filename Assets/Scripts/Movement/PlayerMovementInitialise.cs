@@ -6,11 +6,11 @@ public abstract class PlayerMovementInitialise : MonoBehaviour
 {
     [Header("References")]
     protected Rigidbody rigidBody;
-    protected PlayerControls playerControls;
+    protected HandlePlayerInput _handlePlayerInput;
 
     protected virtual void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
-        playerControls = new PlayerControls();
+        _handlePlayerInput = GetComponent<HandlePlayerInput>();
     }
 }
