@@ -21,6 +21,4 @@ public class Hover : PlayerMovementInitialise
             rigidBody.isKinematic = false;
         }
     }
-
-
 }

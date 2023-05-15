@@ -10,6 +10,7 @@ public class PlayerMovementManager : MonoBehaviour
     private Walk _walkScript;
     private HandleSurfaceStick _stickScript;
     private GravityMultiply _gravityScript;
+    private Boost _boostScript;
 
     private void Awake()
     {
@@ -19,7 +20,7 @@ public class PlayerMovementManager : MonoBehaviour
         _walkScript = GetComponent<Walk>();
         _stickScript = GetComponent<HandleSurfaceStick>();
         _gravityScript = GetComponent<GravityMultiply>();
-
+        _boostScript = GetComponent<Boost>();
     }
 
     private void Start()
@@ -30,6 +31,7 @@ public class PlayerMovementManager : MonoBehaviour
         _walkScript.enabled = false;
         _stickScript.enabled = true;
         _gravityScript.enabled = true;
+        _boostScript.enabled = true;
     }
 
     private void Update()
@@ -41,8 +43,7 @@ public class PlayerMovementManager : MonoBehaviour
             _rotateLookScript.enabled = false;
             _gravityScript.enabled = false;
             _walkScript.enabled = true;
-
-
+            _boostScript.enabled = false;
         }
         else if (!_stickScript.Sticking)
         {
@@ -51,7 +52,7 @@ public class PlayerMovementManager : MonoBehaviour
             _rotateLookScript.enabled = true;
             _gravityScript.enabled = true;
             _walkScript.enabled = false;
-
+            _boostScript.enabled = true;
         }
     }
 

@@ -70,7 +70,6 @@ public class HandleSurfaceStick : PlayerMovementInitialise
         }
         else if(_handlePlayerInput.ButtonSouthPressed)
         {
-
             // Enact physics using raycast normal info
             if (_numberOfRayHits > 0)
             {
