@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovementManager : MonoBehaviour
 {
-    private Fly _flyScript;
+    private FlyB _flyScript;
     private Hover _hoverScript;
     private RotateLook _rotateLookScript;
     private Walk _walkScript;
@@ -14,7 +14,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     private void Awake()
     {
-        _flyScript = GetComponent<Fly>();
+        _flyScript = GetComponent<FlyB>();
         _hoverScript = GetComponent<Hover>();
         _rotateLookScript = GetComponent<RotateLook>();
         _walkScript = GetComponent<Walk>();

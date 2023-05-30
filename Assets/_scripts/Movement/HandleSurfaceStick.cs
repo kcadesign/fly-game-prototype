@@ -98,22 +98,6 @@ public class HandleSurfaceStick : PlayerMovementInitialise
         }
     }
 
-
-
-
-
-    /*
-    private void OnCollisionStay(Collision collision)
-    {
-        Vector3 normal = collision.contacts[0].normal;
-        ObjectToRotate.transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, normal), normal);
-        rigidBody.velocity = Vector3.zero;
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        ObjectToRotate.transform.rotation = cameraRotation.rotation;
-    }
-    */
 }
 
 

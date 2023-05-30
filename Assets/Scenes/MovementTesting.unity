@@ -13275,10 +13275,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d0624b02bb81d49aa2e1e1dc7e71a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flySpeed: 50
-  _rotationSpeed: 10
+  _flySpeed: 100
+  _rotationSpeed: 15
   _verticalLiftAmount: 0.21
-  _verticalFlySpeed: 25
+  _verticalFlySpeed: 50
 --- !u!4 &715151378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6cd8acc9485cb3946ad0dc39c19f5335,

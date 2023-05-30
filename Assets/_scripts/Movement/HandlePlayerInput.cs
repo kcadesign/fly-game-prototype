@@ -9,6 +9,7 @@ public class HandlePlayerInput : MonoBehaviour
 
     private Vector2 _leftStickAxis;
     private Vector2 _rightStickAxis;
+    private float _leftTriggerValue = 0;
     private float _rightTriggerValue = 0;
     private bool _rightShoulderPressed;
     private bool _leftShoulderPressed;
@@ -16,6 +17,7 @@ public class HandlePlayerInput : MonoBehaviour
 
     public Vector2 LeftStickAxis { get { return _leftStickAxis; } }
     public Vector2 RightStickAxis { get { return _rightStickAxis; } }
+    public float LeftTriggerValue { get { return _leftTriggerValue; } }
     public float RightTriggerValue { get { return _rightTriggerValue; } }
     public bool RightShoulderPressed { get { return _rightShoulderPressed; } }
     public bool ButtonSouthPressed { get { return _buttonSouthPressed; } }
@@ -32,6 +34,8 @@ public class HandlePlayerInput : MonoBehaviour
 
         playerControls.Gameplay.Move.performed += Move_performed;
         playerControls.Gameplay.Move.canceled += Move_Cancelled;
+
+        
 
         playerControls.Gameplay.FlyUp.performed += FlyUp_performed;
         playerControls.Gameplay.FlyUp.canceled += FlyUp_Cancelled;

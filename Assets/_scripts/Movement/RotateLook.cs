@@ -5,6 +5,7 @@ using UnityEngine;
 public class RotateLook : PlayerMovementInitialise
 {
     [SerializeField] private float _lookSensitivity = 10;
+    public GameObject CameraLookFocus;
 
     private float rotationX = 0f;
     private float rotationY = 0f;
@@ -24,6 +25,6 @@ public class RotateLook : PlayerMovementInitialise
 
         rotationX = Mathf.Clamp(rotationX, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+        CameraLookFocus.transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
     }
 }
