@@ -13121,7 +13121,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 1
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -13180,6 +13180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lookSensitivity: 150
+  CameraLookFocus: {fileID: 0}
 --- !u!114 &681436500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15321,6 +15322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lookSensitivity: 75
+  CameraLookFocus: {fileID: 0}
 --- !u!114 &1126445496
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,7 +35,8 @@ public class HandlePlayerInput : MonoBehaviour
         playerControls.Gameplay.Move.performed += Move_performed;
         playerControls.Gameplay.Move.canceled += Move_Cancelled;
 
-        
+        playerControls.Gameplay.FlyDown.performed += FlyDown_performed;
+        playerControls.Gameplay.FlyDown.canceled += FlyDown_canceled;
 
         playerControls.Gameplay.FlyUp.performed += FlyUp_performed;
         playerControls.Gameplay.FlyUp.canceled += FlyUp_Cancelled;
@@ -54,12 +55,16 @@ public class HandlePlayerInput : MonoBehaviour
 
     }
 
+
     private void OnDisable()
     {
         playerControls.Gameplay.Disable();
 
         playerControls.Gameplay.Move.performed -= Move_performed;
         playerControls.Gameplay.Move.canceled -= Move_Cancelled;
+
+        playerControls.Gameplay.FlyDown.performed -= FlyDown_performed;
+        playerControls.Gameplay.FlyDown.canceled -= FlyDown_canceled;
 
         playerControls.Gameplay.FlyUp.performed -= FlyUp_performed;
         playerControls.Gameplay.FlyUp.canceled -= FlyUp_Cancelled;
@@ -80,6 +85,9 @@ public class HandlePlayerInput : MonoBehaviour
 
     private void Move_performed(InputAction.CallbackContext value) => _leftStickAxis = value.ReadValue<Vector2>();
     private void Move_Cancelled(InputAction.CallbackContext value) => _leftStickAxis = Vector2.zero;
+
+    private void FlyDown_performed(InputAction.CallbackContext value) => _leftTriggerValue = value.ReadValue<float>();
+    private void FlyDown_canceled(InputAction.CallbackContext value) => _leftTriggerValue = 0;
 
     private void FlyUp_performed(InputAction.CallbackContext value) => _rightTriggerValue = value.ReadValue<float>();
     private void FlyUp_Cancelled(InputAction.CallbackContext value) => _rightTriggerValue = 0;

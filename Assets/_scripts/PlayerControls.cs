@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FlyDown"",
+                    ""type"": ""Value"",
+                    ""id"": ""d12865c3-671b-4bcd-a6a6-435ed54063cc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -236,6 +245,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""LandTakeOff"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e60dc73b-5ab3-4985-b282-e127dc8bcb77"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlyDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42f48290-00a3-4956-b33c-efde8fd8bbdb"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlyDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +281,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Hover = m_Gameplay.FindAction("Hover", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_LandTakeOff = m_Gameplay.FindAction("LandTakeOff", throwIfNotFound: true);
+        m_Gameplay_FlyDown = m_Gameplay.FindAction("FlyDown", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +349,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Hover;
     private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_LandTakeOff;
+    private readonly InputAction m_Gameplay_FlyDown;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -327,6 +360,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Hover => m_Wrapper.m_Gameplay_Hover;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputAction @LandTakeOff => m_Wrapper.m_Gameplay_LandTakeOff;
+        public InputAction @FlyDown => m_Wrapper.m_Gameplay_FlyDown;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -354,6 +388,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LandTakeOff.started += instance.OnLandTakeOff;
             @LandTakeOff.performed += instance.OnLandTakeOff;
             @LandTakeOff.canceled += instance.OnLandTakeOff;
+            @FlyDown.started += instance.OnFlyDown;
+            @FlyDown.performed += instance.OnFlyDown;
+            @FlyDown.canceled += instance.OnFlyDown;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -376,6 +413,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LandTakeOff.started -= instance.OnLandTakeOff;
             @LandTakeOff.performed -= instance.OnLandTakeOff;
             @LandTakeOff.canceled -= instance.OnLandTakeOff;
+            @FlyDown.started -= instance.OnFlyDown;
+            @FlyDown.performed -= instance.OnFlyDown;
+            @FlyDown.canceled -= instance.OnFlyDown;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -401,5 +441,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnHover(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnLandTakeOff(InputAction.CallbackContext context);
+        void OnFlyDown(InputAction.CallbackContext context);
     }
 }
