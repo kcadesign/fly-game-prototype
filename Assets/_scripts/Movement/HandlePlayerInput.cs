@@ -52,9 +52,7 @@ public class HandlePlayerInput : MonoBehaviour
 
         playerControls.Gameplay.Dash.started += Dash_performed;
         playerControls.Gameplay.Dash.canceled += Dash_canceled;
-
     }
-
 
     private void OnDisable()
     {
@@ -80,7 +78,6 @@ public class HandlePlayerInput : MonoBehaviour
 
         playerControls.Gameplay.Dash.started -= Dash_performed;
         playerControls.Gameplay.Dash.canceled -= Dash_canceled;
-
     }
 
     private void Move_performed(InputAction.CallbackContext value) => _leftStickAxis = value.ReadValue<Vector2>();
@@ -100,24 +97,18 @@ public class HandlePlayerInput : MonoBehaviour
 
     private void LandTakeOff_performed(InputAction.CallbackContext value)
     {
-        _buttonSouthPressed = true;
-        //print("South button pressed: " + _buttonSouthPressed);
+        _buttonSouthPressed = value.ReadValueAsButton();
+        print("South button pressed: " + _buttonSouthPressed);
     }
     private void LandTakeOff_cancelled(InputAction.CallbackContext value)
     {
-        _buttonSouthPressed = false;
-        //print("South button pressed: " + _buttonSouthPressed);
+        _buttonSouthPressed = value.ReadValueAsButton();
+        print("South button pressed: " + _buttonSouthPressed);
+
     }
 
-    private void Dash_performed(InputAction.CallbackContext value)
-    {
-        _leftShoulderPressed = true;
-        print("Left shoulder pressed: " + _leftShoulderPressed);
-    }
-    private void Dash_canceled(InputAction.CallbackContext value)
-    {
-        _leftShoulderPressed = false;
-        print("Left shoulder pressed: " + _leftShoulderPressed);
-    }
+    private void Dash_performed(InputAction.CallbackContext value) => _leftShoulderPressed = true;
+    private void Dash_canceled(InputAction.CallbackContext value) => _leftShoulderPressed = false;
+    
 
 }

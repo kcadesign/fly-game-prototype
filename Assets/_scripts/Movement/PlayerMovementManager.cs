@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovementManager : MonoBehaviour
 {
     private FlyB _flyScript;
-    private Hover _hoverScript;
+    //private Hover _hoverScript;
     private RotateLook _rotateLookScript;
     private Walk _walkScript;
     private HandleSurfaceStick _stickScript;
@@ -15,7 +15,7 @@ public class PlayerMovementManager : MonoBehaviour
     private void Awake()
     {
         _flyScript = GetComponent<FlyB>();
-        _hoverScript = GetComponent<Hover>();
+        //_hoverScript = GetComponent<Hover>();
         _rotateLookScript = GetComponent<RotateLook>();
         _walkScript = GetComponent<Walk>();
         _stickScript = GetComponent<HandleSurfaceStick>();
@@ -26,7 +26,7 @@ public class PlayerMovementManager : MonoBehaviour
     private void Start()
     {
         _flyScript.enabled = true;
-        _hoverScript.enabled = true;
+        //_hoverScript.enabled = true;
         _rotateLookScript.enabled = true;
         _walkScript.enabled = false;
         _stickScript.enabled = true;
@@ -39,8 +39,8 @@ public class PlayerMovementManager : MonoBehaviour
         if (_stickScript.Sticking)
         {
             _flyScript.enabled = false;
-            _hoverScript.enabled = false;
-            _rotateLookScript.enabled = false;
+            //_hoverScript.enabled = false;
+            //_rotateLookScript.enabled = false;
             //_gravityScript.enabled = false;
             _walkScript.enabled = true;
             _boostScript.enabled = false;
@@ -48,8 +48,8 @@ public class PlayerMovementManager : MonoBehaviour
         else if (!_stickScript.Sticking)
         {
             _flyScript.enabled = true;
-            _hoverScript.enabled = true;
-            _rotateLookScript.enabled = true;
+            //_hoverScript.enabled = true;
+            //_rotateLookScript.enabled = true;
             //_gravityScript.enabled = true;
             _walkScript.enabled = false;
             _boostScript.enabled = true;

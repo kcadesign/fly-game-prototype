@@ -17,16 +17,38 @@ public class HandleSurfaceStick : PlayerMovementInitialise
 
     public bool Sticking = false;
 
+    private bool _previousButtonState = false;
+
     private void Update()
     {
-        HandleLandPrompt();
-    }
 
+    }
 
     private void FixedUpdate()
     {
         SetRaycastAngle();
+        HandleStickingLogic();
         AddForceAgainstNormal();
+        HandleLandingPrompt();
+    }
+
+    private void HandleStickingLogic()
+    {
+        bool currentButtonState = _handlePlayerInput.ButtonSouthPressed;
+
+        if (_numberOfRayHits == 0)
+        {
+            Sticking = false;
+        }
+        else if (_numberOfRayHits > 0 && currentButtonState && !_previousButtonState)
+        {
+            // Button was just pressed, update the sticking state
+            Sticking = !Sticking;
+            print("Sticking: " + Sticking);
+        }
+
+        // Update the previous button state
+        _previousButtonState = currentButtonState;
     }
 
     private void SetRaycastAngle()
@@ -63,38 +85,28 @@ public class HandleSurfaceStick : PlayerMovementInitialise
 
     private void AddForceAgainstNormal()
     {
-        if (!_handlePlayerInput.ButtonSouthPressed)
+        if (!Sticking)
         {
-            Sticking = false;
-
+            return;
         }
-        else if(_handlePlayerInput.ButtonSouthPressed)
+        else
         {
-            // Enact physics using raycast normal info
-            if (_numberOfRayHits > 0)
-            {
-                rigidBody.velocity = Vector3.zero;
-                _averageNormal /= _numberOfRayHits;
-                rigidBody.AddForce(-_averageNormal * StickingForce, ForceMode.Impulse);
-                rigidBody.useGravity = false;
-                transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, _averageNormal), _averageNormal);
-                Sticking = true;
-
-            }
+            rigidBody.velocity = Vector3.zero;
+            _averageNormal /= _numberOfRayHits;
+            rigidBody.AddForce(-_averageNormal * StickingForce, ForceMode.Impulse);
+            transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, _averageNormal), _averageNormal);
         }
     }
 
-    private void HandleLandPrompt()
+    private void HandleLandingPrompt()
     {
-        if (_numberOfRayHits > 0)
-        {
-            LandingPrompt.SetActive(true);
-
-        }
-        else if(_numberOfRayHits == 0)
+        if(_numberOfRayHits == 0)
         {
             LandingPrompt.SetActive(false);
-
+        }
+        else if(_numberOfRayHits > 0)
+        {
+            LandingPrompt.SetActive(true);
         }
     }
 

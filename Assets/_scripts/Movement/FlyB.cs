@@ -10,6 +10,8 @@ public class FlyB : PlayerMovementInitialise
     [SerializeField] private float _verticalLiftAmount = 0.5f;
     [SerializeField] private float _verticalFlySpeed = 0;
 
+
+
     private void Update()
     {
         HandleRotation();
@@ -32,7 +34,7 @@ public class FlyB : PlayerMovementInitialise
         // Convert movement direction from world space to camera's local space
        movementDirection = Camera.main.transform.TransformDirection(movementDirection);
 
-        Vector3 movementForce = _flySpeed * Time.deltaTime * movementDirection + VerticalLift();
+        Vector3 movementForce = _flySpeed * Time.fixedDeltaTime * movementDirection + VerticalLift();
         movementForce.y = 0f;
 
         if (_handlePlayerInput.LeftStickAxis.magnitude != 0)
@@ -69,12 +71,12 @@ public class FlyB : PlayerMovementInitialise
 
     private void HandleFlyDown()
     {
-        rigidBody.AddForce(_handlePlayerInput.LeftTriggerValue * _verticalFlySpeed * Time.deltaTime * Vector3.down, ForceMode.Impulse);
+        rigidBody.AddForce(_handlePlayerInput.LeftTriggerValue * _verticalFlySpeed * Time.fixedDeltaTime * Vector3.down, ForceMode.Impulse);
     }
 
     private void HandleFlyUp()
     {
-        rigidBody.AddForce(_handlePlayerInput.RightTriggerValue * _verticalFlySpeed * Time.deltaTime * Vector3.up, ForceMode.Impulse);
+        rigidBody.AddForce(_handlePlayerInput.RightTriggerValue * _verticalFlySpeed * Time.fixedDeltaTime * Vector3.up, ForceMode.Impulse);
     }
 
     private Vector3 VerticalLift() => new Vector3(0, _verticalLiftAmount, 0);

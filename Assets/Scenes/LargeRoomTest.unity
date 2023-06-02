@@ -1645,7 +1645,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31020
+  m_Name: pb_Mesh31014
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3059,7 +3059,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30194
+  m_Name: pb_Mesh30188
   serializedVersion: 10
   m_SubMeshes: []
   m_Shapes:
@@ -6949,7 +6949,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30396
+  m_Name: pb_Mesh30390
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7480,14 +7480,11 @@ GameObject:
   - component: {fileID: 681436486}
   - component: {fileID: 681436498}
   - component: {fileID: 681436505}
-  - component: {fileID: 681436497}
   - component: {fileID: 681436507}
-  - component: {fileID: 681436500}
   - component: {fileID: 681436502}
-  - component: {fileID: 681436503}
-  - component: {fileID: 681436504}
-  - component: {fileID: 681436506}
   - component: {fileID: 681436509}
+  - component: {fileID: 681436503}
+  - component: {fileID: 681436506}
   m_Layer: 0
   m_Name: Physical
   m_TagString: Untagged
@@ -7529,21 +7526,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &681436497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681436483}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea4797ddefa4eec4a825faca1ddb4556, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lateralFlySpeed: 100
-  verticalLiftAmount: 0.25
-  verticalFlySpeed: 100
 --- !u!114 &681436498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7554,18 +7536,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b867722290a98084db0453d691c87255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &681436500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681436483}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e0639f02c16144baac6b2188db2f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &681436502
@@ -7580,8 +7550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e529ee17aa59f4e86fca9716dcc8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 5
-  _turnSpeed: 100
+  _walkSpeed: 10
+  _turnSpeed: 80
 --- !u!114 &681436503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7589,31 +7559,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681436483}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0598469920146cc45a3eb437fa999413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CameraRotation: {fileID: 330585546}
   LandingPrompt: {fileID: 1233139913}
-  StickingForce: 10
+  StickingForce: 1
   NumberOfRays: 24
   MaxRayDistance: 1
   RaycastAngle: 360
   Sticking: 0
---- !u!114 &681436504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681436483}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40e784179b0a1d46877a4dbd40a1db4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GravityMultiplier: 10
 --- !u!114 &681436505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7654,7 +7611,7 @@ MonoBehaviour:
   _flySpeed: 150
   _rotationSpeed: 15
   _verticalLiftAmount: 0
-  _verticalFlySpeed: 85
+  _verticalFlySpeed: 80
 --- !u!135 &681436508
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8729,7 +8686,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30168
+  m_Name: pb_Mesh30162
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11915,7 +11872,7 @@ MonoBehaviour:
     m_Bits: 0
   IgnoreTag: 
   CameraRadius: 0.2
-  DampingIntoCollision: 0
+  DampingIntoCollision: 2
   DampingFromCollision: 2
 --- !u!1 &942584208
 GameObject:
@@ -15402,7 +15359,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30988
+  m_Name: pb_Mesh30982
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15762,7 +15719,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30338
+  m_Name: pb_Mesh30332
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24187,7 +24144,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30218
+  m_Name: pb_Mesh30212
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27947,7 +27904,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30974
+  m_Name: pb_Mesh30968
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33284,7 +33241,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30960
+  m_Name: pb_Mesh30954
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
