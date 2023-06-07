@@ -37,7 +37,7 @@ public class FlyB : PlayerMovementInitialise
         Vector3 movementForce = _flySpeed * Time.fixedDeltaTime * movementDirection + VerticalLift();
         movementForce.y = 0f;
 
-        if (_handlePlayerInput.LeftStickAxis.magnitude != 0)
+        if (_handlePlayerInput.LeftStickAxis.magnitude > 0)
         {
             rigidBody.AddForce(movementForce, ForceMode.Impulse);
         }

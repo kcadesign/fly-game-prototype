@@ -1,28 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HandleSurfaceStick : PlayerMovementInitialise
 {
-    public Transform CameraRotation;
-    public GameObject LandingPrompt;
+    public GameObject StickPrompt;
+    public GameObject HeadingArrow;
 
     private int _numberOfRayHits = 0;
     private Vector3 _averageNormal = Vector3.zero;
 
     public float StickingForce = 15;
-    public int NumberOfRays = 6;
-    public float MaxRayDistance = 1f;
-    public float RaycastAngle = 360f;
 
-    public bool Sticking = false;
+    private int _numberOfRays = 24;
+    private float _maxRayDistance = 1f;
+    private float _raycastAngle = 360f;
 
     private bool _previousButtonState = false;
 
-    private void Update()
-    {
+    public bool Sticking = false;
 
-    }
 
     private void FixedUpdate()
     {
@@ -55,11 +54,11 @@ public class HandleSurfaceStick : PlayerMovementInitialise
     {
         _numberOfRayHits = 0;
 
-        for (int i = 0; i < NumberOfRays; i++)
+        for (int i = 0; i < _numberOfRays; i++)
         {
             // Set raycast direction
-            Vector3 rayDirectionRight = Quaternion.AngleAxis(i * RaycastAngle / (NumberOfRays - 1) - RaycastAngle / 2, transform.right) * -transform.up;
-            Vector3 rayDirectionForward = Quaternion.AngleAxis(i * RaycastAngle / (NumberOfRays - 1) - RaycastAngle / 2, transform.forward) * -transform.up;
+            Vector3 rayDirectionRight = Quaternion.AngleAxis(i * _raycastAngle / (_numberOfRays - 1) - _raycastAngle / 2, transform.right) * -transform.up;
+            Vector3 rayDirectionForward = Quaternion.AngleAxis(i * _raycastAngle / (_numberOfRays - 1) - _raycastAngle / 2, transform.forward) * -transform.up;
 
             CalculateAverageNormal(rayDirectionRight, rayDirectionForward);
         }
@@ -68,14 +67,14 @@ public class HandleSurfaceStick : PlayerMovementInitialise
     private void CalculateAverageNormal(Vector3 rayDirectionRight, Vector3 rayDirectionForward)
     {
         // Calculate raycast hit average normal
-        if (Physics.Raycast(transform.position, rayDirectionRight, out RaycastHit hitRight, MaxRayDistance))
+        if (Physics.Raycast(transform.position, rayDirectionRight, out RaycastHit hitRight, _maxRayDistance))
         {
             Debug.DrawLine(transform.position, hitRight.point, Color.red);
             _averageNormal += hitRight.normal;
             _numberOfRayHits++;
         }
 
-        if (Physics.Raycast(transform.position, rayDirectionForward, out RaycastHit hitForward, MaxRayDistance))
+        if (Physics.Raycast(transform.position, rayDirectionForward, out RaycastHit hitForward, _maxRayDistance))
         {
             Debug.DrawLine(transform.position, hitForward.point, Color.green);
             _averageNormal += hitForward.normal;
@@ -89,28 +88,41 @@ public class HandleSurfaceStick : PlayerMovementInitialise
         {
             return;
         }
-        else
-        {
-            rigidBody.velocity = Vector3.zero;
-            _averageNormal /= _numberOfRayHits;
-            rigidBody.AddForce(-_averageNormal * StickingForce, ForceMode.Impulse);
-            transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, _averageNormal), _averageNormal);
-        }
+
+        rigidBody.velocity = Vector3.zero;
+        _averageNormal /= _numberOfRayHits;
+        rigidBody.AddForce(-_averageNormal * StickingForce, ForceMode.Impulse);
+        transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, _averageNormal), _averageNormal);
     }
 
     private void HandleLandingPrompt()
     {
-        if(_numberOfRayHits == 0)
+        // Handle prompt visibility
+        if (_numberOfRayHits == 0)
         {
-            LandingPrompt.SetActive(false);
+            StickPrompt.SetActive(false);
         }
-        else if(_numberOfRayHits > 0)
+        else if (_numberOfRayHits > 0)
         {
-            LandingPrompt.SetActive(true);
+            StickPrompt.SetActive(true);
+            StickPrompt.transform.rotation = Camera.main.transform.rotation;
+        }
+
+        // Handle prompt colour and text
+        Image promptImage = StickPrompt.GetComponent<Image>();
+        TextMeshProUGUI stickPromptText = StickPrompt.GetComponentInChildren<TextMeshProUGUI>();
+        
+        if (!Sticking)
+        {
+            promptImage.color = new Color(0.2563053f, 0.7075472f, 0.1512993f);
+            stickPromptText.text = "X to stick";
+            HeadingArrow.SetActive(false);
+        }
+        else if (Sticking)
+        {
+            promptImage.color = Color.grey;
+            stickPromptText.text = "X to un-stick";
+            HeadingArrow.SetActive(true);
         }
     }
-
 }
-
-
-
