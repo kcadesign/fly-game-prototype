@@ -10,8 +10,6 @@ public class FlyB : PlayerMovementInitialise
     [SerializeField] private float _verticalLiftAmount = 0.5f;
     [SerializeField] private float _verticalFlySpeed = 0;
 
-
-
     private void Update()
     {
         HandleRotation();

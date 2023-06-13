@@ -22,7 +22,6 @@ public class HandleSurfaceStick : PlayerMovementInitialise
 
     public bool Sticking = false;
 
-
     private void FixedUpdate()
     {
         SetRaycastAngle();

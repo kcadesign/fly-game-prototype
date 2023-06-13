@@ -95,17 +95,8 @@ public class HandlePlayerInput : MonoBehaviour
     private void Look_performed(InputAction.CallbackContext value) => _rightStickAxis = value.ReadValue<Vector2>();
     private void Look_canceled(InputAction.CallbackContext value) => _rightStickAxis = Vector2.zero;
 
-    private void LandTakeOff_performed(InputAction.CallbackContext value)
-    {
-        _buttonSouthPressed = value.ReadValueAsButton();
-        print("South button pressed: " + _buttonSouthPressed);
-    }
-    private void LandTakeOff_cancelled(InputAction.CallbackContext value)
-    {
-        _buttonSouthPressed = value.ReadValueAsButton();
-        print("South button pressed: " + _buttonSouthPressed);
-
-    }
+    private void LandTakeOff_performed(InputAction.CallbackContext value) =>_buttonSouthPressed = value.ReadValueAsButton();
+    private void LandTakeOff_cancelled(InputAction.CallbackContext value) =>_buttonSouthPressed = value.ReadValueAsButton();
 
     private void Dash_performed(InputAction.CallbackContext value) => _leftShoulderPressed = true;
     private void Dash_canceled(InputAction.CallbackContext value) => _leftShoulderPressed = false;

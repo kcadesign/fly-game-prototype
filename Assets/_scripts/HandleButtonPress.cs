@@ -7,35 +7,37 @@ public class HandleButtonPress : MonoBehaviour
     private Renderer _buttonRenderer;
     private Color _originalColour;
 
-    
-
     private void Awake()
     {
         _buttonRenderer = GetComponent<Renderer>();
         _originalColour = _buttonRenderer.material.GetColor("_BaseColor");
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-        
 
     }
 
+    private void OnTriggerEnter(Collider collider)
+    {
+        print($"{collider.gameObject.tag} entered trigger");
+
+        if (collider.gameObject.tag == "Human")
+        {
+            _buttonRenderer.material.SetColor("_BaseColor", Color.green);
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-
             _buttonRenderer.material.SetColor("_BaseColor", Color.yellow);
-
         }
     }
 
@@ -45,9 +47,7 @@ public class HandleButtonPress : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             _buttonRenderer.material.SetColor("_BaseColor", Color.yellow);
-
         }
-
     }
     */
 
@@ -57,9 +57,7 @@ public class HandleButtonPress : MonoBehaviour
         {
             _buttonRenderer.material.SetColor("_BaseColor", _originalColour);
             //StartCoroutine(ButtonPrimedTimer());
-
         }
-
     }
     
     /*

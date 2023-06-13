@@ -15,8 +15,6 @@ public class Walk : PlayerMovementInitialise
 
     private void HandleForwardMovement()
     {
-
-        
         Vector3 movementDirection;
 
         movementDirection.x = _handlePlayerInput.LeftStickAxis.x;
@@ -40,8 +38,6 @@ public class Walk : PlayerMovementInitialise
 
     private void HandleRotation()
     {
-
-
         Vector3 positionToLookAt;
 
         positionToLookAt.x = _handlePlayerInput.LeftStickAxis.x;
