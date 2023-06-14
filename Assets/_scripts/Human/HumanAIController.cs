@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class HumanAIController : MonoBehaviour
 {
+    [Header("References")]
     public Transform TargetTransform;
     public Transform RoomBounds;
 
@@ -14,19 +15,22 @@ public class HumanAIController : MonoBehaviour
     public LayerMask GroundLayer;
     public LayerMask TargetLayer;
 
-    public Vector3 _destination;
-    private bool _destinationSet;
+    [Header("Movement Parameters")]
     public float WalkPointRange;
+    private Vector3 _destination;
+    private bool _destinationSet;
 
+    [Header("Interaction Parameters")]
     public Transform SightCentre;
     public float SightRange;
-    public bool TargetInSightRange;
+    private bool _targetInSightRange;
 
     public float AttackRange;
-    public bool TargetInAttackRange;
+    private bool _targetInAttackRange;
     public float AttackDelay;
     private bool _alreadyAttacked;
 
+    [Header("State Setting")]
     private int _isWalking;
     private int _isAttacking;
 
@@ -77,13 +81,13 @@ public class HumanAIController : MonoBehaviour
         // if player alive and still within range
         // attack player
 
-        TargetInSightRange = Physics.CheckSphere(SightCentre.position, SightRange, TargetLayer);
-        TargetInAttackRange = Physics.CheckSphere(SightCentre.position, AttackRange, TargetLayer);
+        _targetInSightRange = Physics.CheckSphere(SightCentre.position, SightRange, TargetLayer);
+        _targetInAttackRange = Physics.CheckSphere(SightCentre.position, AttackRange, TargetLayer);
 
         // Update the current state based on the conditions
-        if (!TargetInSightRange && !TargetInAttackRange) ChangeState(HumanState.Patrolling);
-        else if (TargetInSightRange && !TargetInAttackRange) ChangeState(HumanState.Chasing);
-        else if (TargetInSightRange && TargetInAttackRange) ChangeState(HumanState.Attacking);
+        if (!_targetInSightRange && !_targetInAttackRange) ChangeState(HumanState.Patrolling);
+        else if (_targetInSightRange && !_targetInAttackRange) ChangeState(HumanState.Chasing);
+        else if (_targetInSightRange && _targetInAttackRange) ChangeState(HumanState.Attacking);
 
         switch (CurrentState)
         {

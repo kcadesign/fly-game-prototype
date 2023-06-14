@@ -5,8 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerData : ScriptableObject
 {
-
-    public string playerName;
-    public int maxHealth = 100;
-
+    public string PlayerName;
+    public int Health = 100;
 }

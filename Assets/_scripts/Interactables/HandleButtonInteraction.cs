@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandleButtonPress : MonoBehaviour
+public class HandleButtonInteraction : MonoBehaviour
 {
     private Renderer _buttonRenderer;
     private Color _originalColour;
