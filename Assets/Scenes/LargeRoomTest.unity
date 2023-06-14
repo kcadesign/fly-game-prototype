@@ -12958,7 +12958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb73749d14dfe043ba477a19e96a4b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dashSpeed: 750
+  _dodgeSpeed: 100
 --- !u!114 &681436507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45618,7 +45618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2112840503
 Transform:
   m_ObjectHideFlags: 0
