@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 public class HumanAIController : MonoBehaviour
 {
     [Header("References")]
     public Transform TargetTransform;
     public Transform RoomBounds;
-
     private NavMeshAgent _navMeshAgent;
+
     private Animator _animator;
 
+    [Header("IK References")]
+    public TwoBoneIKConstraint RightHandIK;
+    public RigBuilder rigBuilder;
+    private Transform NewTargetTransform;
+
+    [Header("Layer Masks")]
     public LayerMask GroundLayer;
     public LayerMask TargetLayer;
 
@@ -165,6 +172,15 @@ public class HumanAIController : MonoBehaviour
             _animator.SetBool(_isAttacking, true);
 
             _alreadyAttacked = true;
+
+            // Take a snapshot of the TargetTransform
+            NewTargetTransform = new GameObject("NewTargetTransform").transform;
+            NewTargetTransform.position = TargetTransform.position;
+            NewTargetTransform.rotation = TargetTransform.rotation;
+
+            RightHandIK.data.target = NewTargetTransform;
+            rigBuilder.Build();
+
             Invoke(nameof(ResetAttack), AttackDelay);
         }
     }
@@ -203,6 +219,13 @@ public class HumanAIController : MonoBehaviour
     {
         _alreadyAttacked = false;
         _navMeshAgent.isStopped = false; // Enable AI movement again
+
+        if (NewTargetTransform != null)
+        {
+            Destroy(NewTargetTransform.gameObject);
+            NewTargetTransform = null;
+            RightHandIK.data.target = null;
+        }
 
         // Update destination to player's position
         _destination = TargetTransform.position;
