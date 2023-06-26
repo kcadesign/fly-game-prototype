@@ -14,6 +14,7 @@ public class HandlePlayerInput : MonoBehaviour
     private bool _rightShoulderPressed;
     private bool _leftShoulderPressed;
     private bool _buttonSouthPressed = false;
+    private bool _startButtonPressed;
 
     public Vector2 LeftStickAxis { get { return _leftStickAxis; } }
     public Vector2 RightStickAxis { get { return _rightStickAxis; } }
@@ -22,6 +23,7 @@ public class HandlePlayerInput : MonoBehaviour
     public bool RightShoulderPressed { get { return _rightShoulderPressed; } }
     public bool ButtonSouthPressed { get { return _buttonSouthPressed; } }
     public bool LeftShoulderPressed { get { return _leftShoulderPressed; } }
+    public bool StartButtonPressed { get { return _startButtonPressed; } }
 
     private void Awake()
     {
@@ -52,6 +54,9 @@ public class HandlePlayerInput : MonoBehaviour
 
         playerControls.Gameplay.Dash.started += Dash_performed;
         playerControls.Gameplay.Dash.canceled += Dash_canceled;
+
+        playerControls.Gameplay.Pause.started += Pause_started;
+        playerControls.Gameplay.Pause.canceled += Pause_canceled;
     }
 
     private void OnDisable()
@@ -78,6 +83,9 @@ public class HandlePlayerInput : MonoBehaviour
 
         playerControls.Gameplay.Dash.started -= Dash_performed;
         playerControls.Gameplay.Dash.canceled -= Dash_canceled;
+
+        playerControls.Gameplay.Pause.started -= Pause_started;
+        playerControls.Gameplay.Pause.canceled -= Pause_canceled;
     }
 
     private void Move_performed(InputAction.CallbackContext value) => _leftStickAxis = value.ReadValue<Vector2>();
@@ -95,11 +103,12 @@ public class HandlePlayerInput : MonoBehaviour
     private void Look_performed(InputAction.CallbackContext value) => _rightStickAxis = value.ReadValue<Vector2>();
     private void Look_canceled(InputAction.CallbackContext value) => _rightStickAxis = Vector2.zero;
 
-    private void LandTakeOff_performed(InputAction.CallbackContext value) =>_buttonSouthPressed = value.ReadValueAsButton();
-    private void LandTakeOff_cancelled(InputAction.CallbackContext value) =>_buttonSouthPressed = value.ReadValueAsButton();
+    private void LandTakeOff_performed(InputAction.CallbackContext value) => _buttonSouthPressed = value.ReadValueAsButton();
+    private void LandTakeOff_cancelled(InputAction.CallbackContext value) => _buttonSouthPressed = value.ReadValueAsButton();
 
     private void Dash_performed(InputAction.CallbackContext value) => _leftShoulderPressed = true;
     private void Dash_canceled(InputAction.CallbackContext value) => _leftShoulderPressed = false;
-    
 
+    private void Pause_started(InputAction.CallbackContext value) => _startButtonPressed = value.ReadValueAsButton();
+    private void Pause_canceled(InputAction.CallbackContext value) => _startButtonPressed = value.ReadValueAsButton();
 }

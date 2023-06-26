@@ -15,7 +15,7 @@ public class HumanAIController : MonoBehaviour
 
     [Header("IK References")]
     public TwoBoneIKConstraint RightHandIK;
-    public RigBuilder rigBuilder;
+    private RigBuilder _rigBuilder;
     private Transform NewTargetTransform;
 
     [Header("Layer Masks")]
@@ -32,12 +32,13 @@ public class HumanAIController : MonoBehaviour
     public float SightRange;
     private bool _targetInSightRange;
 
+    public Transform AttackCentre;
     public float AttackRange;
     private bool _targetInAttackRange;
     public float AttackDelay;
     private bool _alreadyAttacked;
 
-    [Header("State Setting")]
+    [Header("Animation Hash")]
     private int _isWalking;
     private int _isAttacking;
 
@@ -55,6 +56,7 @@ public class HumanAIController : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        _rigBuilder = GetComponent<RigBuilder>();
 
         _isWalking = Animator.StringToHash("isWalking");
         _isAttacking = Animator.StringToHash("isAttacking");
@@ -89,7 +91,7 @@ public class HumanAIController : MonoBehaviour
         // attack player
 
         _targetInSightRange = Physics.CheckSphere(SightCentre.position, SightRange, TargetLayer);
-        _targetInAttackRange = Physics.CheckSphere(SightCentre.position, AttackRange, TargetLayer);
+        _targetInAttackRange = Physics.CheckSphere(AttackCentre.position, AttackRange, TargetLayer);
 
         // Update the current state based on the conditions
         if (!_targetInSightRange && !_targetInAttackRange) ChangeState(HumanState.Patrolling);
@@ -179,7 +181,7 @@ public class HumanAIController : MonoBehaviour
             NewTargetTransform.rotation = TargetTransform.rotation;
 
             RightHandIK.data.target = NewTargetTransform;
-            rigBuilder.Build();
+            _rigBuilder.Build();
 
             Invoke(nameof(ResetAttack), AttackDelay);
         }
@@ -222,9 +224,12 @@ public class HumanAIController : MonoBehaviour
 
         if (NewTargetTransform != null)
         {
+            RightHandIK.data.target = TargetTransform;
+
             Destroy(NewTargetTransform.gameObject);
             NewTargetTransform = null;
-            RightHandIK.data.target = null;
+            _rigBuilder.Build();
+
         }
 
         // Update destination to player's position
@@ -237,7 +242,7 @@ public class HumanAIController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(SightCentre.position, AttackRange);
+        Gizmos.DrawWireSphere(AttackCentre.position, AttackRange);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(SightCentre.position, SightRange);

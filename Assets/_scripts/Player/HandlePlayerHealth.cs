@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class HandlePlayerHealth : MonoBehaviour
 {
+    public delegate void PlayerHealthChange(int currentHealth);
+    public static event PlayerHealthChange OnHealthChange;
+
     public HealthSystem PlayerHealth;
+
     [SerializeField] private int _maxHealth = 5;
-    [SerializeField] private int _currentHealth;
+    private int _currentHealth;
 
     private void Awake()
     {
         PlayerHealth = new HealthSystem(_maxHealth);
-    }
+        _currentHealth = PlayerHealth.GetHealth();
 
-    void Start()
-    {
-        
+        OnHealthChange?.Invoke(PlayerHealth.GetHealth());
     }
 
     void Update()
@@ -23,23 +25,16 @@ public class HandlePlayerHealth : MonoBehaviour
         _currentHealth = PlayerHealth.GetHealth();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        print($"Collided with {collision.gameObject.tag}");
-
-        if (collision.gameObject.CompareTag("Human"))
-        {
-            PlayerHealth.Damage(1);
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        print($"Collided with {other.gameObject.tag}");
+        //print($"Player collided with {other.gameObject.tag}");
 
         if (other.gameObject.CompareTag("Human"))
         {
             PlayerHealth.Damage(1);
+            OnHealthChange?.Invoke(PlayerHealth.GetHealth());
+
+            //print($"Player health is: {PlayerHealth.GetHealth()}");
         }
     }
 }
