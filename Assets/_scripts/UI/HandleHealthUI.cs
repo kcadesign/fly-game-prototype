@@ -23,7 +23,6 @@ public class HandleHealthUI : MonoBehaviour
     private void OnDisable()
     {
         HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
-
     }
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth)

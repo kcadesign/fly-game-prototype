@@ -13,6 +13,13 @@ public class HandleInGameUI : MonoBehaviour
         HandleUIState.OnGamePaused += HandleUIState_OnGamePaused;
     }
 
+    private void OnDisable()
+    {
+        HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
+        DataManager.OnScoreReference -= DataManager_OnScoreReference;
+        HandleUIState.OnGamePaused -= HandleUIState_OnGamePaused;
+    }
+
     private void HandleUIState_OnGamePaused(bool isPaused)
     {
         if (isPaused)
@@ -23,13 +30,6 @@ public class HandleInGameUI : MonoBehaviour
         {
             InGameUI.SetActive(true);
         }
-    }
-
-    private void OnDisable()
-    {
-        HandlePlayerHealth.OnHealthChange -= HandlePlayerHealth_OnHealthChange;
-        DataManager.OnScoreReference -= DataManager_OnScoreReference;
-        HandleUIState.OnGamePaused -= HandleUIState_OnGamePaused;
     }
 
     private void HandlePlayerHealth_OnHealthChange(int currentHealth)

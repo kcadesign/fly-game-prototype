@@ -109,6 +109,10 @@ public class HandlePlayerInput : MonoBehaviour
     private void Dash_performed(InputAction.CallbackContext value) => _leftShoulderPressed = true;
     private void Dash_canceled(InputAction.CallbackContext value) => _leftShoulderPressed = false;
 
-    private void Pause_started(InputAction.CallbackContext value) => _startButtonPressed = value.ReadValueAsButton();
+    private void Pause_started(InputAction.CallbackContext value) 
+    {
+        //print(value);
+        _startButtonPressed = value.ReadValueAsButton();
+    } 
     private void Pause_canceled(InputAction.CallbackContext value) => _startButtonPressed = value.ReadValueAsButton();
 }

@@ -11,7 +11,6 @@ public class HandleUIState : MonoBehaviour
     public delegate void GamePaused(bool isPaused);
     public static event GamePaused OnGamePaused;
 
-
     public GameObject WinPanel;
     public TextMeshProUGUI FinishTimeText;
     private float _finishTime;
@@ -61,8 +60,6 @@ public class HandleUIState : MonoBehaviour
             // Button was just pressed, toggle the pause state
             _isPaused = !_isPaused;
             OnGamePaused?.Invoke(_isPaused);
-            print(_isPaused);
-
         }
 
         // Update the previous button state

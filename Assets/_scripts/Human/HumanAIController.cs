@@ -154,10 +154,7 @@ public class HumanAIController : MonoBehaviour
         _destination = TargetTransform.position;
         _destination.y = transform.position.y;
 
-        if (_navMeshAgent.isOnNavMesh)
-        {
-            FindAndSetPath(_destination);
-        }
+        if (_navMeshAgent.isOnNavMesh) FindAndSetPath(_destination);
     }
 
     private void PerformAttackingActions()
@@ -201,6 +198,7 @@ public class HumanAIController : MonoBehaviour
             _navMeshAgent.SetDestination(destination);
         }
     }
+
     private void SearchRandomDestination()
     {
         Vector3 randomDirection;
@@ -229,7 +227,6 @@ public class HumanAIController : MonoBehaviour
             Destroy(NewTargetTransform.gameObject);
             NewTargetTransform = null;
             _rigBuilder.Build();
-
         }
 
         // Update destination to player's position
@@ -237,7 +234,6 @@ public class HumanAIController : MonoBehaviour
         _destination.y = transform.position.y;
         _navMeshAgent.SetDestination(_destination);
     }
-
 
     private void OnDrawGizmosSelected()
     {
