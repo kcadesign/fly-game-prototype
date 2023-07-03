@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ButtonSystem
   m_EditorClassIdentifier: 
   ElementsNeededForSolve: 8
-  CurrentActivatedElements: 8
+  CurrentActivatedElements: 0
   SystemPointValue: 50
   Solved: 0

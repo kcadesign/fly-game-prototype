@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ElementsNeededForSolve: 1
   CurrentActivatedElements: 0
-  SystemPointValue: 50
+  SystemPointValue: 10
   Solved: 0
